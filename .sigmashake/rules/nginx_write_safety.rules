@@ -5,10 +5,9 @@ rule nginx-server-tokens {
   enabled true
   priority 90
   severity warning
-  ASK write
+  LOG write
   IF path GLOB "**/*.conf" AND content NOT LINE_REGEX "server_tokens\\s+off"
   MESSAGE "Nginx reveals its version number by default, which attackers use to find specific exploits. Add 'server_tokens off;' to your configuration."
-  PROMPT "Are you sure you want to expose the Nginx version to clients? It's safer to hide it."
 }
 
 rule nginx-alias-path-traversal {
